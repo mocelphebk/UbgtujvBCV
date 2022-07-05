@@ -11,7 +11,6 @@ jobs:
   updateData:
     name: Update data - ${{ matrix.fetch }}
     runs-on: ubuntu-20.04
-    if: ${{ github.repository_owner == 'searx'}}
     strategy:
       matrix:
         fetch:
@@ -40,10 +39,6 @@ jobs:
           make V=1 install
 
       - name: Fetch data
-        env:
-          FETCH_SCRIPT: ./searx_extra/update/${{ matrix.fetch }}
-        run: |
-          V=1 ./manage pyenv.cmd python "$FETCH_SCRIPT"
 
       - name: Create Pull Request
         id: cpr
